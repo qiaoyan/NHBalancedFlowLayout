@@ -210,7 +210,7 @@
         }
         
         for (int i = 0; i < [self.collectionView numberOfItemsInSection:section]; i++) {
-            CGRect itemFrame = _itemFrameSections[section][i];
+            CGRect itemFrame = _itemFrameSections[section] ? _itemFrameSections[section][i] : CGRectZero;
             if (CGRectIntersectsRect(rect, itemFrame)) {
                 NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:section];
                 [layoutAttributes addObject:[self layoutAttributesForItemAtIndexPath:indexPath]];
@@ -317,7 +317,7 @@
 
 - (CGRect)itemFrameForIndexPath:(NSIndexPath *)indexPath
 {
-    return _itemFrameSections[indexPath.section][indexPath.item];
+    return _itemFrameSections[indexPath.section] ? _itemFrameSections[indexPath.section][indexPath.item] : CGRectZero;
 }
 
 - (CGRect)footerFrameForSection:(NSInteger)section
