@@ -75,23 +75,23 @@
     return solution;
 }
 
-+ (NSArray *)linearPartitionForSequence:(NSArray *)sequence numberOfPartitions:(NSInteger)numberOfPartitions
++ (NSMutableArray *)linearPartitionForSequence:(NSArray *)sequence numberOfPartitions:(NSInteger)numberOfPartitions
 {
     NSInteger n = [sequence count];
     NSInteger k = numberOfPartitions;
     
-    if (k <= 0) return @[];
+    if (k <= 0) return [NSMutableArray array];
     
     if (k >= n) {
         NSMutableArray *partition = [[NSMutableArray alloc] init];
         [sequence enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [partition addObject:@[obj]];
         }];
-        return [partition copy];
+        return [partition mutableCopy];
     }
     
     if (n == 1) {
-        return @[sequence];
+        return [NSMutableArray arrayWithObject:sequence];
     }
     
     // get the solution table
@@ -128,7 +128,7 @@
     
     [answer insertObject:currentAnswer atIndex:0];
     
-    return [answer copy];
+    return answer;
 }
 
 @end
